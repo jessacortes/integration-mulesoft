@@ -1,0 +1,19 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:clicksend-mule-4-s="http://www.mulesoft.org/schema/mule/clicksend-mule-4-s"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+          http://www.mulesoft.org/schema/mule/clicksend-mule-4-s http://www.mulesoft.org/schema/mule/clicksend-mule-4-s/current/mule-clicksend-mule-4-s.xsd">
+
+    <clicksend-mule-4-s:config name="config" configId="configId">
+        <clicksend-mule-4-s:connection requiredParameter="aValue" />
+    </clicksend-mule-4-s:config>
+
+    <flow name="sayHiFlow">
+        <clicksend-mule-4-s:say-hi person="Mariano Gonzalez"/>
+    </flow>
+
+    <flow name="retrieveInfoFlow">
+        <clicksend-mule-4-s:retrieve-info config-ref="config"/>
+    </flow>
+
+</mule>
