@@ -16,6 +16,7 @@ import java.util.Base64;
 import java.util.Scanner;
 import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.ParameterGroup;
+import org.mule.runtime.extension.api.annotation.param.display.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.json.JSONArray;
@@ -29,9 +30,9 @@ public class ClickSendMule4sOperations {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(ClickSendMule4sOperations.class);
 	
-  @MediaType(value = ANY, strict = false)
+  @MediaType(value = MediaType.APPLICATION_JSON, strict = false)
   @Alias("SendSMS")
-  public String sendSMS(@Config ClickSendMule4sConfiguration configuration, @Connection ClickSendMule4sConnection connection, String to, String message) throws IOException{
+  public String sendSMS(@Config ClickSendMule4sConfiguration configuration, @Connection ClickSendMule4sConnection connection, @ParameterGroup(name="SMS Parameters") SMSParameters smsParams) throws IOException{
 	  
 	  LOGGER.info("Initianting SMS Send Operation.");
 	  LOGGER.info("Fetching Credentials from Configuration.");
@@ -55,9 +56,14 @@ public class ClickSendMule4sOperations {
 		  root = new JSONObject();
 		  JSONArray arr = new JSONArray();
 		  JSONObject messageObj = new JSONObject();
-		  messageObj.put("to", to);
+		  messageObj.put("to", smsParams.To);
 		  messageObj.put("source", "mulesoft");
-		  messageObj.put("body", message);
+		  messageObj.put("body", smsParams.Message);
+		  
+		  if(smsParams.CustomString != null && !smsParams.CustomString.isEmpty()) {
+			  messageObj.put("custom_string", smsParams.CustomString);
+		  }
+		  
 		  arr.put(messageObj);
 		  root.put("messages", arr);
 	  } catch (JSONException e) {
@@ -95,9 +101,9 @@ public class ClickSendMule4sOperations {
 	  }
   }
 	  
-	  @MediaType(value = ANY, strict = false)
+	  @MediaType(value = MediaType.APPLICATION_JSON, strict = false)
 	  @Alias("SendMMS")
-	  public String sendMMS(@Config ClickSendMule4sConfiguration configuration, @Connection ClickSendMule4sConnection connection, String to, String subject, String from, String country, String message, String filePath) throws Exception{
+	  public String sendMMS(@Config ClickSendMule4sConfiguration configuration, @Connection ClickSendMule4sConnection connection, @ParameterGroup(name="MMS Parameters") MMSParameters mmsParams) throws Exception{
 		  LOGGER.info("Initiating MMS Send Operation.");
 		  LOGGER.info("Fetching Credentials from Configuration.");
 		  String username = configuration.getUserId();
@@ -106,13 +112,13 @@ public class ClickSendMule4sOperations {
 		  LOGGER.info("Uploading File and Fetching URL");
 		  String url;
 		  try {
-			url = UploadFile(connection, filePath, username, password);
-			LOGGER.info(url);
-		} catch (Exception e) {
-			LOGGER.error("Error Encoutered While Uploading the File and Fetching URL.");
-			LOGGER.error(e.getMessage());
-			throw new Exception("File Failed to Upload");
-		}
+				url = UploadFile(connection, mmsParams.FilePath, username, password);
+				LOGGER.info(url);
+			} catch (Exception e) {
+				LOGGER.error("Error Encoutered While Uploading the File and Fetching URL.");
+				LOGGER.error(e.getMessage());
+				throw new Exception("File Failed to Upload");
+			}
 		  
 		  
 		  LOGGER.info("Encoding Credentials.");
@@ -132,12 +138,20 @@ public class ClickSendMule4sOperations {
 			  root = new JSONObject();
 			  JSONArray arr = new JSONArray();
 			  JSONObject messageObj = new JSONObject();
-			  messageObj.put("to", to);
+			  messageObj.put("to", mmsParams.To);
 			  messageObj.put("source", "mulesoft");
-			  messageObj.put("subject", subject);
-			  messageObj.put("from", from);
-			  messageObj.put("body", message);
-			  messageObj.put("country", country);
+			  messageObj.put("subject", mmsParams.Subject);
+			  
+			  if(mmsParams.From != null && !mmsParams.From.isEmpty()) {
+				  messageObj.put("from", mmsParams.From);
+			  }
+			  
+			  messageObj.put("body", mmsParams.Message);
+			  
+			  if(mmsParams.CustomString != null && !mmsParams.CustomString.isEmpty()) {
+				  messageObj.put("custom_string", mmsParams.CustomString);
+			  }
+			  
 			  arr.put(messageObj);
 			  root.put("messages", arr);
 			  root.put("media_file", url);
