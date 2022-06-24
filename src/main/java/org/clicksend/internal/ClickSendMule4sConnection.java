@@ -23,12 +23,10 @@ public final class ClickSendMule4sConnection {
 
   public HttpURLConnection GetConnection(String endpoint) {
 	  String uri = BASE_URL+endpoint;
-	  LOGGER.info(String.format("Creating Connection to %s",uri));
 	  URL url;
 	  try {
 		  url = new URL(uri);
 		  connection =  (HttpURLConnection) url.openConnection();
-		  LOGGER.info(String.format("Connection successfully to %s",uri));
 		  return connection;
 	  } catch (MalformedURLException e) {
 		  // TODO Auto-generated catch block

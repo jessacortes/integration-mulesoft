@@ -3,7 +3,7 @@
     "id": "java",
     "attributes": {
       "type": "org.clicksend.internal.ClickSendMule4sExtension",
-      "version": "1.0.4"
+      "version": "1.0.0"
     }
   },
   "name": "ClickSend",

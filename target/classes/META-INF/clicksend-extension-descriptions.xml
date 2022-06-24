@@ -37,26 +37,26 @@
         <operation name="SendMMS">
             <description><![CDATA[]]></description>
             <parameters>
-                <parameter name="to">
-                    <description><![CDATA[]]></description>
-                </parameter>
-                <parameter name="subject">
-                    <description><![CDATA[]]></description>
-                </parameter>
-                <parameter name="from">
-                    <description><![CDATA[]]></description>
-                </parameter>
-                <parameter name="country">
-                    <description><![CDATA[]]></description>
-                </parameter>
-                <parameter name="message">
-                    <description><![CDATA[]]></description>
-                </parameter>
-                <parameter name="filePath">
-                    <description><![CDATA[]]></description>
-                </parameter>
                 <parameter name="outputMimeType">
                     <description><![CDATA[The mime type of the payload that this operation outputs.]]></description>
+                </parameter>
+                <parameter name="To">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="Subject">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="From">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="Message">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="CustomString">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="FilePath">
+                    <description><![CDATA[]]></description>
                 </parameter>
                 <parameter name="target">
                     <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
@@ -72,14 +72,20 @@
         <operation name="SendSMS">
             <description><![CDATA[]]></description>
             <parameters>
-                <parameter name="to">
-                    <description><![CDATA[]]></description>
-                </parameter>
-                <parameter name="message">
-                    <description><![CDATA[]]></description>
-                </parameter>
                 <parameter name="outputMimeType">
                     <description><![CDATA[The mime type of the payload that this operation outputs.]]></description>
+                </parameter>
+                <parameter name="To">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="From">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="Message">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="CustomString">
+                    <description><![CDATA[]]></description>
                 </parameter>
                 <parameter name="target">
                     <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>

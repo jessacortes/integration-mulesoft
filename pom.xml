@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>c80debad-c169-4dfc-9d6c-ca4de2b0b281</groupId>
     <artifactId>mule_clicksend_connectors</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.0</version>
     <packaging>mule-extension</packaging>
     <name>ClickSend</name>
 
@@ -40,7 +40,7 @@
 		<layout>default</layout> 
 		<url>https://repository.mulesoft.org/releases/</url>
 		<snapshots>   
-		<enabled>false</enabled>
+		<enabled>true</enabled>
 		</snapshots> 
 		</pluginRepository>
 	</pluginRepositories>
