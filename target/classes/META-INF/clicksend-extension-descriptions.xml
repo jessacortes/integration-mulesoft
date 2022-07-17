@@ -58,6 +58,9 @@
                 <parameter name="FilePath">
                     <description><![CDATA[]]></description>
                 </parameter>
+                <parameter name="FileURL">
+                    <description><![CDATA[]]></description>
+                </parameter>
                 <parameter name="target">
                     <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
                 </parameter>

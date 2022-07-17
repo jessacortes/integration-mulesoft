@@ -1,14 +1,14 @@
 {
   "name": "ClickSend",
   "description": "This is the main class of an extension, is the entry point from which configurations, connection providers, operations and sources are going to be declared.",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "vendor": "Mulesoft",
   "category": "COMMUNITY",
   "xmlDsl": {
     "prefix": "clicksend",
     "namespace": "http://www.mulesoft.org/schema/mule/clicksend",
     "schemaLocation": "http://www.mulesoft.org/schema/mule/clicksend/current/mule-clicksend.xsd",
-    "schemaVersion": "1.0.0",
+    "schemaVersion": "1.0.2",
     "xsdFileName": "mule-clicksend.xsd"
   },
   "resources": [],
@@ -276,7 +276,7 @@
                     "password": false,
                     "text": false,
                     "query": false,
-                    "order": 7,
+                    "order": 8,
                     "tabName": "Advanced"
                   },
                   "allowedStereotypeModels": [],
@@ -428,40 +428,6 @@
                   "name": "CustomString",
                   "description": "",
                   "modelProperties": {}
-                },
-                {
-                  "type": {
-                    "format": "java",
-                    "type": "String"
-                  },
-                  "hasDynamicType": false,
-                  "required": true,
-                  "isConfigOverride": false,
-                  "expressionSupport": "SUPPORTED",
-                  "role": "BEHAVIOUR",
-                  "dslConfiguration": {
-                    "allowsInlineDefinition": true,
-                    "allowsReferences": true,
-                    "allowTopLevelDefinition": false
-                  },
-                  "layoutModel": {
-                    "password": false,
-                    "text": false,
-                    "query": false,
-                    "order": 6
-                  },
-                  "allowedStereotypeModels": [],
-                  "name": "FilePath",
-                  "displayModel": {
-                    "pathModel": {
-                      "type": "FILE",
-                      "fileExtensions": [],
-                      "acceptsUrls": false,
-                      "location": "ANY"
-                    }
-                  },
-                  "description": "",
-                  "modelProperties": {}
                 }
               ],
               "exclusiveParametersModels": [],
@@ -486,6 +452,83 @@
                   "hasDynamicType": false,
                   "required": false,
                   "isConfigOverride": false,
+                  "expressionSupport": "SUPPORTED",
+                  "defaultValue": "",
+                  "role": "BEHAVIOUR",
+                  "dslConfiguration": {
+                    "allowsInlineDefinition": true,
+                    "allowsReferences": true,
+                    "allowTopLevelDefinition": false
+                  },
+                  "layoutModel": {
+                    "password": false,
+                    "text": false,
+                    "query": false,
+                    "order": 6
+                  },
+                  "allowedStereotypeModels": [],
+                  "name": "FilePath",
+                  "displayModel": {
+                    "pathModel": {
+                      "type": "FILE",
+                      "fileExtensions": [],
+                      "acceptsUrls": false,
+                      "location": "ANY"
+                    }
+                  },
+                  "description": "",
+                  "modelProperties": {}
+                },
+                {
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "hasDynamicType": false,
+                  "required": false,
+                  "isConfigOverride": false,
+                  "expressionSupport": "SUPPORTED",
+                  "defaultValue": "",
+                  "role": "BEHAVIOUR",
+                  "dslConfiguration": {
+                    "allowsInlineDefinition": true,
+                    "allowsReferences": true,
+                    "allowTopLevelDefinition": false
+                  },
+                  "layoutModel": {
+                    "password": false,
+                    "text": false,
+                    "query": false,
+                    "order": 7
+                  },
+                  "allowedStereotypeModels": [],
+                  "name": "FileURL",
+                  "description": "",
+                  "modelProperties": {}
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "layoutModel": {
+                "password": false,
+                "text": false,
+                "query": false,
+                "order": 2
+              },
+              "showInDsl": false,
+              "name": "MMS Media Parameters",
+              "description": "",
+              "modelProperties": {}
+            },
+            {
+              "parameters": [
+                {
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "hasDynamicType": false,
+                  "required": false,
+                  "isConfigOverride": false,
                   "expressionSupport": "NOT_SUPPORTED",
                   "role": "BEHAVIOUR",
                   "dslConfiguration": {
@@ -497,7 +540,7 @@
                     "password": false,
                     "text": false,
                     "query": false,
-                    "order": 8,
+                    "order": 9,
                     "tabName": "Advanced"
                   },
                   "allowedStereotypeModels": [],
@@ -528,7 +571,7 @@
                     "password": false,
                     "text": false,
                     "query": false,
-                    "order": 9,
+                    "order": 10,
                     "tabName": "Advanced"
                   },
                   "allowedStereotypeModels": [],
@@ -545,7 +588,7 @@
                 "password": false,
                 "text": false,
                 "query": false,
-                "order": 3
+                "order": 4
               },
               "showInDsl": false,
               "name": "Output",
@@ -673,7 +716,7 @@
                     "password": false,
                     "text": false,
                     "query": false,
-                    "order": 10,
+                    "order": 11,
                     "tabName": "Advanced"
                   },
                   "allowedStereotypeModels": [],
@@ -698,7 +741,7 @@
                 "password": false,
                 "text": false,
                 "query": false,
-                "order": 4
+                "order": 5
               },
               "showInDsl": false,
               "name": "Connection",

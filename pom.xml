@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>c80debad-c169-4dfc-9d6c-ca4de2b0b281</groupId>
+    <groupId>7212f166-c623-457a-a01e-bb302f7ec155</groupId>
     <artifactId>mule_clicksend_connectors</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
     <packaging>mule-extension</packaging>
     <name>ClickSend</name>
 
@@ -28,7 +28,7 @@
 	  <repository> 
 	    <id>exchange-repository</id> 
 	    <name>Exchange Repository</name> 
-	    <url>https://maven.anypoint.mulesoft.com/api/v1/organizations/c80debad-c169-4dfc-9d6c-ca4de2b0b281/maven</url> 
+	    <url>https://maven.anypoint.mulesoft.com/api/v1/organizations/7212f166-c623-457a-a01e-bb302f7ec155/maven</url> 
 	    <layout>default</layout> 
 	  </repository> 
 	</distributionManagement> 

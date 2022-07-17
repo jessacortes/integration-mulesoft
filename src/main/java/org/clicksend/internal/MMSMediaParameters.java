@@ -7,26 +7,15 @@ import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.display.Path;
 
-public class MMSParameters {
+public class MMSMediaParameters {
 	@Parameter
+	@Path(type = Type.FILE)
+	@Optional(defaultValue = "")
 	@Expression(ExpressionSupport.SUPPORTED)
-	String To;
+	String FilePath;
 	
 	@Parameter
+	@Optional(defaultValue = "")
 	@Expression(ExpressionSupport.SUPPORTED)
-	String Subject;
-	
-	@Parameter
-	@Optional
-	@Expression(ExpressionSupport.SUPPORTED)
-	String From;
-	
-	@Parameter
-	@Expression(ExpressionSupport.SUPPORTED)
-	String Message;
-	
-	@Parameter
-	@Optional
-	@Expression(ExpressionSupport.SUPPORTED)
-	String CustomString;
+	String FileURL;
 }

@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: org.clicksend.ClickSendMule4sOperationsTestCase
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.285 s <<< FAILURE! - in org.clicksend.ClickSendMule4sOperationsTestCase
+initializationError(org.clicksend.ClickSendMule4sOperationsTestCase)  Time elapsed: 0.01 s  <<< ERROR!
+java.lang.IllegalArgumentException: pom file doesn't exits for path: C:\Users\yaqoo\Desktop\ClickSend\Milestone%201\Custom%20Connectors%20-%20Mule%204\mule_clicksend_connectors\pom.xml
+

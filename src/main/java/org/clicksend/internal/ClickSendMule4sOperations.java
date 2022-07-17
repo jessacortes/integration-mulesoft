@@ -26,7 +26,7 @@ import org.mule.runtime.extension.api.annotation.param.Connection;
 public class ClickSendMule4sOperations {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(ClickSendMule4sOperations.class);
-	
+
 	@MediaType(value = MediaType.APPLICATION_JSON, strict = false)
 	@Alias("SendSMS")
 	@DisplayName("Send SMS")
@@ -96,23 +96,31 @@ public class ClickSendMule4sOperations {
 	@Summary("Send MMS to a number")
 	public String sendMMS(@Config ClickSendMule4sConfiguration configuration,
 			@Connection ClickSendMule4sConnection connection,
-			@ParameterGroup(name = "MMS Parameters") MMSParameters mmsParams) throws Exception {
+			@ParameterGroup(name = "MMS Parameters") MMSParameters mmsParams,
+			@ParameterGroup(name = "MMS Media Parameters") MMSMediaParameters mmsMediaParams) throws Exception {
 		String username = configuration.getUserId();
 		String password = configuration.getPassword();
 
 		String url;
-		try {
-			url = UploadFile(connection, mmsParams.FilePath, username, password);
-		} catch (Exception e) {
-			LOGGER.error("Error While Uploading the File and Fetching URL.");
-			e.printStackTrace();
-			throw e;
+
+		if (mmsMediaParams.FilePath != null && !mmsMediaParams.FilePath.isEmpty()) {
+			try {
+				url = UploadFile(connection, mmsMediaParams.FilePath, username, password);
+			} catch (Exception e) {
+				LOGGER.error("Error While Uploading the File and Fetching URL.");
+				e.printStackTrace();
+				throw e;
+			}
+			if (url == null) {
+				throw new Exception("Failed to Upload File.");
+			}
+		} else {
+			url = mmsMediaParams.FileURL;
+			if(url==null || url.isEmpty()) {
+				throw new IllegalArgumentException("Either File Path or File URL parameter must be provided.");
+			}
 		}
 		
-		if (url==null) {
-			throw new Exception ("Failed to Upload File.");
-		}
-
 		String auth = "Basic " + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
 		HttpURLConnection conn = connection.GetConnection("/mms/send");
 		conn.setRequestMethod("POST");
@@ -143,9 +151,12 @@ public class ClickSendMule4sOperations {
 			arr.put(messageObj);
 			root.put("messages", arr);
 			root.put("media_file", url);
+			
+			
 		} catch (JSONException e) {
 			LOGGER.error("Error While Preparing Request Payload.");
 			e.printStackTrace();
+			throw e;
 		}
 
 		try (OutputStream os = conn.getOutputStream()) {
@@ -226,6 +237,5 @@ public class ClickSendMule4sOperations {
 			throw e;
 		}
 	}
-	
-	
+
 }
