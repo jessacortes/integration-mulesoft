@@ -18,4 +18,20 @@ public class MMSMediaParameters {
 	@Optional(defaultValue = "")
 	@Expression(ExpressionSupport.SUPPORTED)
 	String FileURL;
+
+	public String getFilePath() {
+		return FilePath;
+	}
+
+	public void setFilePath(String filePath) {
+		FilePath = filePath;
+	}
+
+	public String getFileURL() {
+		return FileURL;
+	}
+
+	public void setFileURL(String fileURL) {
+		FileURL = fileURL;
+	}
 }

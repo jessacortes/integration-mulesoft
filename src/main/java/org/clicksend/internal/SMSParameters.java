@@ -23,4 +23,20 @@ public class SMSParameters {
 	@Optional
 	@Expression(ExpressionSupport.SUPPORTED)
 	String CustomString;
+
+	public void setTo(String to) {
+		To = to;
+	}
+	
+	public void setFrom(String from) {
+		From = from;
+	}
+	public void setMessage(String message) {
+		Message = message;
+	}
+
+	public void setCustomString(String customString) {
+		CustomString = customString;
+	}
+	
 }

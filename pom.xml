@@ -16,6 +16,10 @@
         <version>1.1.6</version>
     </parent>
     
+    <properties>
+    	<muleJavaEeBomVersion>4.6.0</muleJavaEeBomVersion>
+    </properties>
+    
     <dependencies>
     	<dependency>
 		   <groupId>org.json</groupId>
@@ -45,4 +49,15 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<dependencyManagement>
+	    <dependencies>
+	      <dependency>
+	        <groupId>org.mule</groupId>
+	        <artifactId>mule-javaee-runtime-bom</artifactId>
+	        <version>${muleJavaEeBomVersion}</version>
+	        <type>pom</type>
+	        <scope>import</scope>
+	      </dependency>
+	    </dependencies>
+  </dependencyManagement>
 </project>
