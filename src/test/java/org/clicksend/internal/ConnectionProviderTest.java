@@ -1,6 +1,6 @@
 package org.clicksend.internal;
 
-import org.clicksend.internal.ClickSendMule4sConnectionProvider;
+import org.clicksend.internal.provider.ClickSendMule4sConnectionProvider;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mule.runtime.api.connection.ConnectionException;

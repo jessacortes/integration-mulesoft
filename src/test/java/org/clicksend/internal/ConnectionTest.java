@@ -25,8 +25,8 @@ public class ConnectionTest {
     {
 		ClickSendMule4sConnection a = new ClickSendMule4sConnection();
 		HttpURLConnection r = a.GetConnection("/sms/send");
-		//Assert.assertNotNull(r);
 		a.invalidate();
+		Assert.assertNotNull(r);
     }
 	
 //	@Test(expected = MalformedURLException.class)

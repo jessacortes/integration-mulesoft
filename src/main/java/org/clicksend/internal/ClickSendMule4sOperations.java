@@ -1,6 +1,7 @@
 package org.clicksend.internal;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -8,24 +9,31 @@ import java.net.HttpURLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
-import org.mule.runtime.extension.api.annotation.param.MediaType;
-import org.mule.runtime.extension.api.annotation.param.ParameterGroup;
-import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
-import org.mule.runtime.extension.api.annotation.param.display.Summary;
-import org.mule.runtime.extension.api.annotation.source.EmitsResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.mule.runtime.extension.api.annotation.Alias;
-import org.mule.runtime.extension.api.annotation.Sources;
 import org.mule.runtime.extension.api.annotation.param.Config;
 import org.mule.runtime.extension.api.annotation.param.Connection;
+import org.mule.runtime.extension.api.annotation.param.MediaType;
+import org.mule.runtime.extension.api.annotation.param.ParameterGroup;
+import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
+import org.mule.runtime.extension.api.annotation.param.display.Summary;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClickSendMule4sOperations {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(ClickSendMule4sOperations.class);
+	private static final String APPLICATION_JSON_UTF_8 = "application/json; utf-8";
+	private static final String AUTHORIZATION = "Authorization";
+	private static final String CONTENT_TYPE = "Content-Type";
+	private static final String ERROR_WHILE_PREPARING_REQUEST_PAYLOAD = "Error While Preparing Request Payload.";
+	private static final String APPLICATION_JSON = "application/json";
+	private static final String ACCEPT = "Accept";
+	private static final String UTF_8 = "utf-8";
+	private static final String BASIC = "Basic ";
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClickSendMule4sOperations.class);
 
 	@MediaType(value = MediaType.APPLICATION_JSON, strict = false)
 	@Alias("SendSMS")
@@ -38,12 +46,12 @@ public class ClickSendMule4sOperations {
 		String username = configuration.getUserId();
 		String password = configuration.getPassword();
 
-		String auth = "Basic " + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
+		String auth = BASIC + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
 		HttpURLConnection conn = connection.GetConnection("/sms/send");
 		conn.setRequestMethod("POST");
-		conn.setRequestProperty("Content-Type", "application/json; utf-8");
-		conn.setRequestProperty("Accept", "application/json");
-		conn.setRequestProperty("Authorization", auth);
+		conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON_UTF_8);
+		conn.setRequestProperty(ACCEPT, APPLICATION_JSON);
+		conn.setRequestProperty(AUTHORIZATION, auth);
 		conn.setDoOutput(true);
 
 		JSONObject root = null;
@@ -62,12 +70,12 @@ public class ClickSendMule4sOperations {
 			arr.put(messageObj);
 			root.put("messages", arr);
 		} catch (JSONException e) {
-			LOGGER.error("Error While Preparing Request Payload.");
+			LOGGER.error(ERROR_WHILE_PREPARING_REQUEST_PAYLOAD);
 			e.printStackTrace();
 		}
 
 		try (OutputStream os = conn.getOutputStream()) {
-			byte[] input = root.toString().getBytes("utf-8");
+			byte[] input = root.toString().getBytes(UTF_8);
 			os.write(input, 0, input.length);
 		} catch (Exception e) {
 			LOGGER.error("Error While Writing Request Payload to Connection:");
@@ -75,7 +83,7 @@ public class ClickSendMule4sOperations {
 			throw e;
 		}
 
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), UTF_8))) {
 			StringBuilder response = new StringBuilder();
 			String responseLine = null;
 			while ((responseLine = br.readLine()) != null) {
@@ -101,12 +109,12 @@ public class ClickSendMule4sOperations {
 		String username = configuration.getUserId();
 		String password = configuration.getPassword();
 
-		String url;
+		String url = mmsMediaParams.FileURL;
 
 		if (mmsMediaParams.FilePath != null && !mmsMediaParams.FilePath.isEmpty()) {
 			try {
 				url = UploadFile(connection, mmsMediaParams.FilePath, username, password);
-			} catch (Exception e) {
+			} catch (FileNotFoundException e) {
 				LOGGER.error("Error While Uploading the File and Fetching URL.");
 				e.printStackTrace();
 				throw e;
@@ -114,19 +122,18 @@ public class ClickSendMule4sOperations {
 			if (url == null) {
 				throw new Exception("Failed to Upload File.");
 			}
-		} else {
-			url = mmsMediaParams.FileURL;
-			if(url==null || url.isEmpty()) {
-				throw new IllegalArgumentException("Either File Path or File URL parameter must be provided.");
-			}
+		} 
+		
+		if(url==null || url.isEmpty()) {
+			throw new IllegalArgumentException("Either File Path or File URL parameter must be provided.");
 		}
 		
-		String auth = "Basic " + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
+		String auth = BASIC + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
 		HttpURLConnection conn = connection.GetConnection("/mms/send");
 		conn.setRequestMethod("POST");
-		conn.setRequestProperty("Content-Type", "application/json; utf-8");
-		conn.setRequestProperty("Accept", "application/json");
-		conn.setRequestProperty("Authorization", auth);
+		conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON_UTF_8);
+		conn.setRequestProperty(ACCEPT, APPLICATION_JSON);
+		conn.setRequestProperty(AUTHORIZATION, auth);
 		conn.setDoOutput(true);
 
 		JSONObject root = null;
@@ -154,13 +161,13 @@ public class ClickSendMule4sOperations {
 			
 			
 		} catch (JSONException e) {
-			LOGGER.error("Error While Preparing Request Payload.");
+			LOGGER.error(ERROR_WHILE_PREPARING_REQUEST_PAYLOAD);
 			e.printStackTrace();
 			throw e;
 		}
 
 		try (OutputStream os = conn.getOutputStream()) {
-			byte[] input = root.toString().getBytes("utf-8");
+			byte[] input = root.toString().getBytes(UTF_8);
 			os.write(input, 0, input.length);
 		} catch (Exception e) {
 			LOGGER.error("Error While Writing Request Payload to Connection.");
@@ -168,14 +175,14 @@ public class ClickSendMule4sOperations {
 			throw e;
 		}
 
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), UTF_8))) {
 			StringBuilder response = new StringBuilder();
 			String responseLine = null;
 			while ((responseLine = br.readLine()) != null) {
 				response.append(responseLine.trim());
 			}
 			return response.toString();
-		} catch (Exception e) {
+		} catch (FileNotFoundException e) {
 			LOGGER.error("Error While Reading Payload From Response.");
 			e.printStackTrace();
 			throw e;
@@ -195,12 +202,12 @@ public class ClickSendMule4sOperations {
 
 		byte[] encoded = Base64.getEncoder().encode(bytes);
 
-		String auth = "Basic " + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
+		String auth = BASIC + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
 		HttpURLConnection conn = connection.GetConnection("/uploads?convert=mms");
 		conn.setRequestMethod("POST");
-		conn.setRequestProperty("Content-Type", "application/json; utf-8");
-		conn.setRequestProperty("Accept", "application/json");
-		conn.setRequestProperty("Authorization", auth);
+		conn.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON_UTF_8);
+		conn.setRequestProperty(ACCEPT, APPLICATION_JSON);
+		conn.setRequestProperty(AUTHORIZATION, auth);
 		conn.setDoOutput(true);
 
 		JSONObject root = null;
@@ -208,13 +215,13 @@ public class ClickSendMule4sOperations {
 			root = new JSONObject();
 			root.put("content", new String(encoded));
 		} catch (JSONException e) {
-			LOGGER.error("Error While Preparing Request Payload.");
+			LOGGER.error(ERROR_WHILE_PREPARING_REQUEST_PAYLOAD);
 			e.printStackTrace();
 			throw e;
 		}
 
 		try (OutputStream os = conn.getOutputStream()) {
-			byte[] input = root.toString().getBytes("utf-8");
+			byte[] input = root.toString().getBytes(UTF_8);
 			os.write(input, 0, input.length);
 		} catch (Exception e) {
 			LOGGER.error("Error While Writing Request Payload to Connection.");
@@ -222,7 +229,7 @@ public class ClickSendMule4sOperations {
 			return null;
 		}
 
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), UTF_8))) {
 			StringBuilder response = new StringBuilder();
 			String responseLine = null;
 			while ((responseLine = br.readLine()) != null) {

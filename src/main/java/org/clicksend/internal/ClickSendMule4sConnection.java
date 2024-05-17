@@ -16,8 +16,11 @@ public final class ClickSendMule4sConnection {
 
   private final String BASE_URL = "https://rest.clicksend.com/v3";
   private HttpURLConnection connection = null;
-  private Logger LOGGER = LoggerFactory.getLogger(ClickSendMule4sConnection.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ClickSendMule4sConnection.class);
   
+  /**
+   * Default constructor.
+   */
   public ClickSendMule4sConnection() {
   }
 

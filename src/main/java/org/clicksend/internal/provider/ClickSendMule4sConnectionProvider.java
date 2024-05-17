@@ -1,4 +1,4 @@
-package org.clicksend.internal;
+package org.clicksend.internal.provider;
 
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
@@ -6,6 +6,7 @@ import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.api.connection.ConnectionValidationResult;
 import org.mule.runtime.api.connection.PoolingConnectionProvider;
 import org.mule.runtime.api.connection.ConnectionProvider;
+import org.clicksend.internal.ClickSendMule4sConnection;
 import org.mule.runtime.api.connection.CachedConnectionProvider;
 import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
@@ -29,7 +30,7 @@ import org.springframework.core.annotation.Order;
  */
 public class ClickSendMule4sConnectionProvider implements PoolingConnectionProvider<ClickSendMule4sConnection> {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(ClickSendMule4sConnectionProvider.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClickSendMule4sConnectionProvider.class);
 
 	@Override
 	public ClickSendMule4sConnection connect() throws ConnectionException {

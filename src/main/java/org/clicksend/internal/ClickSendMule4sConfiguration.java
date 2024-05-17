@@ -1,12 +1,13 @@
 package org.clicksend.internal;
 
+import org.clicksend.internal.provider.ClickSendMule4sConnectionProvider;
 import org.mule.runtime.extension.api.annotation.Operations;
-import org.mule.runtime.extension.api.annotation.Sources;
 import org.mule.runtime.extension.api.annotation.connectivity.ConnectionProviders;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
 import org.mule.runtime.extension.api.annotation.param.display.Password;
+import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.springframework.core.annotation.Order;
 
 /**
@@ -18,12 +19,14 @@ import org.springframework.core.annotation.Order;
 public class ClickSendMule4sConfiguration {
 
   @Parameter
+  @Placement
   @DisplayName(value = "Username/Email")
   @Order(value = 1)
   @Example(value = "abc@xyz.com")
   private String userId;
   
   @Parameter
+  @Placement
   @DisplayName(value = "Password")
   @Order(value = 2)
   @Password

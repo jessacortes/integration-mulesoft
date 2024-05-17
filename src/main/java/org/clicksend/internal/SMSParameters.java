@@ -4,9 +4,11 @@ import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.extension.api.annotation.Expression;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
+import org.mule.runtime.extension.api.annotation.param.display.Placement;
 
 public class SMSParameters {
 	@Parameter
+	@Placement
 	@Expression(ExpressionSupport.SUPPORTED)
 	String To;
 	
@@ -16,6 +18,7 @@ public class SMSParameters {
 	String From;
 	
 	@Parameter
+	@Placement
 	@Expression(ExpressionSupport.SUPPORTED)
 	String Message;
 	
