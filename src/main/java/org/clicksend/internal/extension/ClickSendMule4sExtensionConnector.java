@@ -1,8 +1,8 @@
-package org.clicksend.internal.config;
+package org.clicksend.internal.extension;
 
 import org.mule.runtime.extension.api.annotation.Extension;
 import org.mule.runtime.extension.api.annotation.Sources;
-import org.clicksend.internal.ClickSendMule4sConfiguration;
+import org.clicksend.internal.config.ClickSendMule4sConfiguration;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.extension.api.annotation.Configurations;
 import org.mule.runtime.extension.api.annotation.dsl.xml.Xml;

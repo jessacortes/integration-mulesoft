@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
 
+import org.clicksend.internal.config.ClickSendMule4sConfiguration;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -106,7 +107,7 @@ public class ClickSendMule4sOperations {
 	public String sendMMS(@Config ClickSendMule4sConfiguration configuration,
 			@Connection ClickSendMule4sConnection connection,
 			@ParameterGroup(name = "MMS Parameters") MMSParameters mmsParams,
-			@ParameterGroup(name = "MMS Media Parameters") MMSMediaParameters mmsMediaParams) throws Exception {
+			@ParameterGroup(name = "MMS Media Parameters") MMSMediaParameters mmsMediaParams) throws IllegalArgumentException, UnsupportedEncodingException, JSONException, IOException {
 		String username = configuration.getUserId();
 		String password = configuration.getPassword();
 

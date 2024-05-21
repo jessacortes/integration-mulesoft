@@ -1,5 +1,6 @@
-package org.clicksend.internal;
+package org.clicksend.internal.config;
 
+import org.clicksend.internal.ClickSendMule4sOperations;
 import org.clicksend.internal.connection.provider.ClickSendMule4sConnectionProvider;
 import org.mule.runtime.extension.api.annotation.Operations;
 import org.mule.runtime.extension.api.annotation.connectivity.ConnectionProviders;
