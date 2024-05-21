@@ -1,4 +1,4 @@
-package org.clicksend.internal.extension;
+package org.clicksend.internal.config;
 
 import org.mule.runtime.extension.api.annotation.Extension;
 import org.mule.runtime.extension.api.annotation.Sources;

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -112,22 +113,16 @@ public class ClickSendMule4sOperations {
 		String url = mmsMediaParams.FileURL;
 
 		if (mmsMediaParams.FilePath != null && !mmsMediaParams.FilePath.isEmpty()) {
-			try {
-				url = UploadFile(connection, mmsMediaParams.FilePath, username, password);
-			} catch (FileNotFoundException e) {
-				LOGGER.error("Error While Uploading the File and Fetching URL.");
-				e.printStackTrace();
-				throw e;
-			}
+			url = UploadFile(connection, mmsMediaParams.FilePath, username, password);
 			if (url == null) {
-				throw new Exception("Failed to Upload File.");
+				throw new FileNotFoundException("Failed to Upload File.");
 			}
-		} 
-		
-		if(url==null || url.isEmpty()) {
+		}
+
+		if (url == null || url.isEmpty()) {
 			throw new IllegalArgumentException("Either File Path or File URL parameter must be provided.");
 		}
-		
+
 		String auth = BASIC + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
 		HttpURLConnection conn = connection.GetConnection("/mms/send");
 		conn.setRequestMethod("POST");
@@ -158,8 +153,7 @@ public class ClickSendMule4sOperations {
 			arr.put(messageObj);
 			root.put("messages", arr);
 			root.put("media_file", url);
-			
-			
+
 		} catch (JSONException e) {
 			LOGGER.error(ERROR_WHILE_PREPARING_REQUEST_PAYLOAD);
 			e.printStackTrace();
@@ -190,7 +184,7 @@ public class ClickSendMule4sOperations {
 	}
 
 	private String UploadFile(ClickSendMule4sConnection connection, String filePath, String username, String password)
-			throws Exception {
+			throws UnsupportedEncodingException, IOException {
 		byte[] bytes;
 		try {
 			bytes = Files.readAllBytes(Paths.get(filePath));
@@ -238,7 +232,7 @@ public class ClickSendMule4sOperations {
 			JSONObject resObj = new JSONObject(response.toString());
 			String url = resObj.getJSONObject("data").getString("_url");
 			return url;
-		} catch (Exception e) {
+		} catch (FileNotFoundException e) {
 			LOGGER.error("Error While Reading Payload From Response:");
 			e.printStackTrace();
 			throw e;

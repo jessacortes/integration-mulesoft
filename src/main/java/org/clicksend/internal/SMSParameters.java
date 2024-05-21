@@ -8,7 +8,7 @@ import org.mule.runtime.extension.api.annotation.param.display.Placement;
 
 public class SMSParameters {
 	@Parameter
-	@Placement
+	@Placement(tab = "DEFAULT_TAB")
 	@Expression(ExpressionSupport.SUPPORTED)
 	String To;
 	
@@ -18,7 +18,7 @@ public class SMSParameters {
 	String From;
 	
 	@Parameter
-	@Placement
+	@Placement(tab = "DEFAULT_TAB")
 	@Expression(ExpressionSupport.SUPPORTED)
 	String Message;
 	

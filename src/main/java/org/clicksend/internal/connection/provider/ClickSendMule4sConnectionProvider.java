@@ -1,4 +1,4 @@
-package org.clicksend.internal.provider;
+package org.clicksend.internal.connection.provider;
 
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.extension.api.annotation.param.Parameter;

@@ -28,15 +28,6 @@
 		</dependency>
     </dependencies>
     
-   <!--  <distributionManagement> 
-	  <repository> 
-	    <id>anypoint-exchange</id> 
-	    <name>Exchange Repository</name> 
-	    <url>https://maven.anypoint.mulesoft.com/api/v1/organizations/ea38180c-a991-411a-b4f8-f5e3e89b849d/maven</url> 
-	    <layout>default</layout> 
-	  </repository> 
-	</distributionManagement>  -->
-	
 	<pluginRepositories>
 		<pluginRepository> 
 		<id>mulesoft-releases</id>

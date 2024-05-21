@@ -18,11 +18,6 @@ public final class ClickSendMule4sConnection {
   private HttpURLConnection connection = null;
   private static final Logger LOGGER = LoggerFactory.getLogger(ClickSendMule4sConnection.class);
   
-  /**
-   * Default constructor.
-   */
-  public ClickSendMule4sConnection() {
-  }
 
   public HttpURLConnection GetConnection(String endpoint) {
 	  String uri = BASE_URL+endpoint;
