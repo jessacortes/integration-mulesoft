@@ -184,7 +184,7 @@ public class ClickSendMule4sOperations {
 	}
 
 	private String UploadFile(ClickSendMule4sConnection connection, String filePath, String username, String password)
-			throws UnsupportedEncodingException, IOException {
+			throws UnsupportedEncodingException, IOException, JSONException {
 		byte[] bytes;
 		try {
 			bytes = Files.readAllBytes(Paths.get(filePath));
