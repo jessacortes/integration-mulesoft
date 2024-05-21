@@ -10,22 +10,22 @@ public class SMSParameters {
 	@Parameter
 	@Placement(tab = "DEFAULT_TAB")
 	@Expression(ExpressionSupport.SUPPORTED)
-	String To;
+	public String To;
 	
 	@Parameter
 	@Optional
 	@Expression(ExpressionSupport.SUPPORTED)
-	String From;
+	public String From;
 	
 	@Parameter
 	@Placement(tab = "DEFAULT_TAB")
 	@Expression(ExpressionSupport.SUPPORTED)
-	String Message;
+	public String Message;
 	
 	@Parameter
 	@Optional
 	@Expression(ExpressionSupport.SUPPORTED)
-	String CustomString;
+	public String CustomString;
 
 	public void setTo(String to) {
 		To = to;

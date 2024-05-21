@@ -12,12 +12,12 @@ public class MMSMediaParameters {
 	@Path(type = Type.FILE)
 	@Optional(defaultValue = "")
 	@Expression(ExpressionSupport.SUPPORTED)
-	String FilePath;
+	public String FilePath;
 	
 	@Parameter
 	@Optional(defaultValue = "")
 	@Expression(ExpressionSupport.SUPPORTED)
-	String FileURL;
+	public String FileURL;
 
 	public String getFilePath() {
 		return FilePath;

@@ -3,6 +3,7 @@ package org.clicksend.internal;
 import java.io.IOException;
 
 import org.clicksend.internal.config.ClickSendMule4sConfiguration;
+import org.clicksend.internal.operation.ClickSendMule4sOperations;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

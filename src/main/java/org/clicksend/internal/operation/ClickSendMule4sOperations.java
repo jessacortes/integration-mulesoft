@@ -1,4 +1,4 @@
-package org.clicksend.internal;
+package org.clicksend.internal.operation;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -11,6 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
 
+import org.clicksend.internal.ClickSendMule4sConnection;
+import org.clicksend.internal.MMSMediaParameters;
+import org.clicksend.internal.MMSParameters;
+import org.clicksend.internal.SMSParameters;
 import org.clicksend.internal.config.ClickSendMule4sConfiguration;
 import org.json.JSONArray;
 import org.json.JSONException;
